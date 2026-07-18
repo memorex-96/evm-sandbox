@@ -1,0 +1,106 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.13; 
+import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+
+/**  
+    @title Constant Product Automated Market Maker (CPAMM) contract
+    @author Carson Crowley 
+    @notice 
+    @dev Uses the a constant product forumla: x * y = k, where x and y are the reserves of two tokens in the pool,
+        and k is a constant, during swaps. 
+*/ 
+
+contract AMM {
+    // ===================
+    // STATE VARIABLES
+    // ===================
+
+    IERC20 public token0; 
+    IERC20 public token1; 
+
+    uint256 public reserve0; 
+    uint256 public reserve1;
+
+    uint256 public totalLiquidity; 
+
+    ///@notice mapping of user addresses to their liquidity shares in the pool 
+    mapping(address => uint256) public liquidityShares;     
+
+    // ===================
+    // EVENTS
+    // ===================
+    /** 
+        @notice Emitted when a user adds liquidity to the pool
+        @param provider The address removing liquidity
+        @param amount0 The amount of token0 widthdrawn
+        @param amount1 The amount of token1 widthdrawn
+        @param shares The amount of LP tokens burned by the provider  
+    */
+    event Mint(address indexed provider, uint256 amount0, uint256 amount1, uint256 shares); 
+    
+    /**
+        @notice Emitted when liquidity is withdrawn from the pool
+        @param provider The address removing liquidity 
+        @param amount0 The amount of token0 withdrawn
+        @param amount1 The amount of token1 withdrtawn 
+        @param shares the amout of LP tokens burned by the provider
+    */
+    event Burn(address indexed provider, uint256 amount0, uint256 amount1, uint256 shares);
+
+    /**
+        @notice Emitted on token swaps
+        @param swapper The address executing the trade
+        @param tokenIn The address of the token deposited into the pool 
+        @param amountIn The quantity of the input token recieved
+        @param amountOut The quantity of the output token recieved 
+    */ 
+    event Swap(address indexed swapper, address indexed tokenIn, uint256 amountIn, uint256 amountOut);
+
+    // ===================
+    // FUNCTIONS
+    // =================== 
+
+    /**
+        @notice Initializes the AMM pool with a fixed pair of ERC20 tokens
+        @dev Token addresses are immutable once set via deployment
+        @param _token0 Address of the first ERC20 token 
+        @param _token1 Address of the second ERC20 token 
+    */
+    constructor(address _token0, address _token1) {
+        token0 = IERC20(_token0);
+        token1 = IERC20(_token1);  
+    }
+    
+    /**
+        @notice Adds Liquidity to the pool, minting LP tokens to the caller
+        @dev Protects pool ratio by enforcing proportional depositss if resercves exist
+        @param _amount0 Expected deposit amount for token0 
+        @param _amount1 Expected deposit amount for token1
+        @return shares The total numbner of LP shares minted to the user
+    */
+    function addLiquidity (uint256 _amount0, uint256 _amount1) external returns(uint256 shares) {
+        //TODO: Need to implement proportional mint logic
+    } 
+    
+
+    /**
+        @notice Burns LP tokens to widthdraw proportional underlying reserves
+        @param _shares The total number of LP shares the caller wants to liquidate
+        @return amount0 The quantity of token0 returned to the user
+        @return amount1 The quantity of token1 returned to the user
+    */
+    function removeLiquidity (uint256 _shares) external returns (uint256 amount0, uint256 amount1) {
+        //TODO: need to implement calc based on total share pool ratio 
+    }
+
+    /**
+        @notice Swaps an explicit quantity of one pair token for the other
+        @dev Calculates output dynamically using the constant product equation 
+        @param _tokenIn The address of teh asset being traded into the pool
+        @param _amountIn The exact quantity of the input token being traded
+        @return amountOut The net quantity of the target token set to the user
+    */
+    function swap (address _tokenIn, uint256 _amountIn) external returns(uint256 amountOut){
+        //TODO: need to implement check for valid token, apply invariant formula, update internal reserves 
+    }
+}
