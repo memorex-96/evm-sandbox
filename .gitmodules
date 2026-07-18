@@ -1,0 +1,3 @@
+[submodule "packages/foundry/lib/solidity-bytes-utils"]
+	path = packages/foundry/lib/solidity-bytes-utils
+	url = https://github.com/GNSPS/solidity-bytes-utils
