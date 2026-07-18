@@ -24,3 +24,6 @@ docs/
 # Dotenv file
 .env
 localhost.json
+
+# original Foundry README file 
+FoundryREADME.txt
