@@ -3899,6 +3899,7 @@ __metadata:
     eslint-config-next: "npm:~16.2.4"
     eslint-config-prettier: "npm:~10.1.8"
     eslint-plugin-prettier: "npm:~5.5.5"
+    jsbi: "npm:3.2.5"
     kubo-rpc-client: "npm:~6.1.0"
     next: "npm:~16.2.4"
     next-nprogress-bar: "npm:~2.4.7"
@@ -11052,7 +11053,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsbi@npm:^3.1.4":
+"jsbi@npm:3.2.5, jsbi@npm:^3.1.4":
   version: 3.2.5
   resolution: "jsbi@npm:3.2.5"
   checksum: 10c0/74d4725f76f169d7848f3f2f88a8dd252d995421c1fefdaed8116daf4a1897c514ce8336ebb68303a2cf8d659e4fbc16791a1d232420b52cec3cf1f12ad760ed
@@ -14573,7 +14574,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "se-2@workspace:."
   dependencies:
+    "@ethersproject/bignumber": "npm:^5.8.0"
     husky: "npm:~9.1.6"
+    jsbi: "npm:3.2.5"
     lint-staged: "npm:~13.2.2"
   languageName: unknown
   linkType: soft
